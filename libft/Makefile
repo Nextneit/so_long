@@ -58,19 +58,19 @@ OBJS = $(FILES:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	ar rcs $(NAME) $(OBJS) 
+	@ar rcs $(NAME) $(OBJS) 
 $(OBJS) : $(FILES)
-	gcc $(FLAGS) -c $(FILES)
+	@gcc $(FLAGS) -c $(FILES)
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean:
-	rm -f $(NAME) $(OBJS)
+	@rm -f $(NAME) $(OBJS)
 
 re: fclean all
 
 bonus: $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+	@ar rcs $(NAME) $(OBJ)
 
 .PHONY : all re fclean clean

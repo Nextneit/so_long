@@ -6,16 +6,11 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:38:49 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2023/11/06 11:39:15 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:19:55 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
-/*oid ft_leaks(void)
-{
-	system("leaks -q so_long");
-}*/
 
 static void	initialize(t_game *game)
 {

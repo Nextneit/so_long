@@ -6,16 +6,11 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:38:49 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2023/11/07 11:04:08 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:17:34 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-/*void ft_leaks(void)
-{
-	system("leaks -q so_long");
-}*/
 
 static void	initialize(t_game *game)
 {
@@ -79,11 +74,11 @@ int	main(int argc, char **argv)
 	t_game	*game;
 
 	if (argc != 2)
-		return (ft_printf("Error: No hay mapa\n"), EXIT_FAILURE);
+		return (ft_printf("Error: no map\n"), EXIT_FAILURE);
 	game = ft_calloc(1, sizeof(t_game));
 	initialize(game);
 	if ((check_format(argv[1])) == 1)
-		return (ft_printf("Error: Formato de mapa incorrecto\n"), EXIT_FAILURE);
+		return (ft_printf("Error: incorrect format\n"), EXIT_FAILURE);
 	if (read_map(game, argv[1]) == 1)
 		return (free_all(game), EXIT_FAILURE);
 	if ((check_map(game) == 1))

@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:50:37 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2023/11/08 10:14:56 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:16:35 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	check_format(char *map_name)
 static int	check_wall(t_game *game)
 {
 	int	i;
-	int	k;
+	int	j;
 
 	i = 0;
-	k = game->lines - 1;
+	j = game->lines - 1;
 	while (game->map[0][i] != '\0')
 	{
 		if (game->map[0][i] != '1')
@@ -39,16 +39,16 @@ static int	check_wall(t_game *game)
 		i++;
 	}
 	i = 0;
-	while (game->map[k][i] != '\0')
+	while (game->map[j][i] != '\0')
 	{
-		if (game->map[k][i] != '1')
+		if (game->map[j][i] != '1')
 			return (EXIT_FAILURE);
 		i++;
 	}
 	i--;
-	while (k-- > 0)
+	while (j-- > 0)
 	{
-		if (game->map[k][0] != '1' || game->map[k][i] != '1')
+		if (game->map[j][0] != '1' || game->map[j][i] != '1')
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -57,17 +57,17 @@ static int	check_wall(t_game *game)
 static int	check_elements(t_game *game)
 {
 	int	i;
-	int	k;
+	int	j;
 
 	i = 0;
-	k = game->lines;
-	while (--k >= 0)
+	j = game->lines;
+	while (--j >= 0)
 	{
-		while (game->map[k][i] != '\0')
+		while (game->map[j][i] != '\0')
 		{
-			if (game->map[k][i] != '1' && game->map[k][i] != '0'
-				&& game->map[k][i] != 'C' && game->map[k][i] != 'P'
-					&& game->map[k][i] != 'E')
+			if (game->map[j][i] != '1' && game->map[j][i] != '0'
+				&& game->map[j][i] != 'C' && game->map[j][i] != 'P'
+					&& game->map[j][i] != 'E')
 				return (EXIT_FAILURE);
 			i++;
 		}
@@ -79,23 +79,23 @@ static int	check_elements(t_game *game)
 static int	count_objects(t_game *game)
 {
 	int	i;
-	int	k;
+	int	j;
 
-	k = game->lines;
-	while (--k > 0)
+	j = game->lines;
+	while (--j > 0)
 	{
 		i = -1;
-		while (game->map[k][++i] != '\0')
+		while (game->map[j][++i] != '\0')
 		{
-			if (game->map[k][i] == 'C')
+			if (game->map[j][i] == 'C')
 				game->coin++;
-			else if (game->map[k][i] == 'P')
+			else if (game->map[j][i] == 'P')
 			{
 				game->player++;
 				game->p_position.x = i;
-				game->p_position.y = k;
+				game->p_position.y = j;
 			}
-			else if (game->map[k][i] == 'E')
+			else if (game->map[j][i] == 'E')
 				game->exit++;
 		}
 	}
@@ -107,24 +107,24 @@ static int	count_objects(t_game *game)
 int	check_map(t_game *game)
 {
 	int	i;
-	int	k;
+	int	j;
 
 	i = 0;
-	k = game->lines;
+	j = game->lines;
 	i = ft_strlen(game->map[0]);
-	while (--k >= 0)
-		if (i != ft_strlen(game->map[k]))
-			return (ft_printf("Error: Mapa no rectangular\n"), EXIT_FAILURE);
+	while (--j >= 0)
+		if (i != ft_strlen(game->map[j]))
+			return (ft_printf("Error: not rectangular\n"), EXIT_FAILURE);
 	if (count_objects(game) == 1)
-		return (ft_printf("Error: Numero de elementos erroneo\n"),
+		return (ft_printf("Error: incorrect number of elements\n"),
 			EXIT_FAILURE);
 	if (check_elements(game) == 1)
-		return (ft_printf("Error: Elemento erroneo\n"), EXIT_FAILURE);
+		return (ft_printf("Error: incorrect element\n"), EXIT_FAILURE);
 	if (check_wall(game) == 1)
-		return (ft_printf("Error: Mapa no rodeado de muros\n"), EXIT_FAILURE);
+		return (ft_printf("Error: no close map\n"), EXIT_FAILURE);
 	valid_way(game, (t_point){game->columns, game->lines}, game->p_position);
 	if (game->coin != game->coin_copy || game->exit != game->exit_copy)
-		return (ft_printf("Error: Camino no valido\n"), EXIT_FAILURE);
+		return (ft_printf("Error: no valid way\n"), EXIT_FAILURE);
 	game->coin = 0;
 	return (EXIT_SUCCESS);
 }

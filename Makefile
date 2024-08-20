@@ -6,7 +6,7 @@
 #    By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 15:05:59 by ncruz-ga          #+#    #+#              #
-#    Updated: 2023/11/08 11:31:36 by ncruz-ga         ###   ########.fr        #
+#    Updated: 2024/08/20 12:26:33 by ncruz-ga         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,14 +46,14 @@ OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 $(NAME):	$(OBJ) $(LIBFT) $(MLX)
 				@$(LIB) $(SO_LONG) $(OBJ)
-				@$(CC) $(CFLAGS) $(SO_LONG) $(MLX) $(LIBFT) $(LIB_SYS) -o $(NAME)
+				@$(CC) $(CFLAGS) $(SO_LONG) $(MLX) $(LIBFT) $(LIB_SYS) -o $(NAME) -no-pie
 
 $(OBJ):		src/%.o : src/%.c
 			@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME_BONUS):	$(OBJ_BONUS) $(LIBFT) $(MLX)
 				@$(LIB) $(SO_LONG_BONUS) $(OBJ_BONUS)
-				@$(CC) $(CFLAGS) $(SO_LONG_BONUS) $(MLX) $(LIBFT) $(LIB_SYS) -o $(NAME_BONUS)
+				@$(CC) $(CFLAGS) $(SO_LONG_BONUS) $(MLX) $(LIBFT) $(LIB_SYS) -o $(NAME_BONUS) -no-pie
 
 $(OBJ_BONUS):	srcb/%.o : srcb/%.c
 				$(CC) $(CFLAGS) -c $< -o $@
